@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barre & Assiette – Calisthénie et nutrition</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF0EC;--surface:#fff;--ink:#1B2A35;--mute:#5B6B76;--line:#CBD2CC;--bar:#F2B705;--bar-ink:#1B2A35;--low:#1F7A4D;--mid:#B7791F;--high:#B3362B;--hd:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;--bd:"Figtree",system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121A20;--surface:#1B262E;--ink:#E9EEE9;--mute:#9AABB5;--line:#33444F;--low:#4CC38A;--mid:#E3A83B;--high:#F0786C}}
+:root[data-theme="dark"]{--bg:#121A20;--surface:#1B262E;--ink:#E9EEE9;--mute:#9AABB5;--line:#33444F;--low:#4CC38A;--mid:#E3A83B;--high:#F0786C}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.55 var(--bd)}
+h1,h2,h3{font-family:var(--hd);line-height:1.1;margin:0}
+header{background:var(--ink);color:#EEF0EC;padding:1.2rem 1rem .9rem}
+.wrap{max-width:62rem;margin:0 auto}
+.logo{font:800 clamp(1.8rem,5vw,2.8rem)/1 var(--hd);letter-spacing:-.02em}
+.logo i{display:inline-block;width:.9em;height:.16em;background:var(--bar);vertical-align:middle;margin:0 .15em;border-radius:2px}
+header p{margin:.4rem 0 0;color:#B8C4CA;max-width:40rem}
+nav{display:flex;gap:.4rem;margin-top:1rem;flex-wrap:wrap}
+nav button{font:600 .95rem var(--bd);padding:.55rem 1rem;border:2px solid #4A5B66;background:transparent;color:#EEF0EC;border-radius:6px;cursor:pointer}
+nav button[aria-selected=true]{background:var(--bar);border-color:var(--bar);color:var(--bar-ink)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--bar);outline-offset:2px}
+main{padding:1.2rem 1rem 3rem}
+section[hidden]{display:none}
+h2{font-size:1.7rem;margin-bottom:.4rem}
+.lead{color:var(--mute);max-width:42rem;margin:0 0 1rem}
+.tools{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.tools input,.tools select{font:inherit;padding:.5rem .7rem;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.chip{font:600 .85rem var(--bd);padding:.4rem .8rem;border:1px solid var(--line);border-radius:99px;background:var(--surface);color:var(--ink);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:.8rem}
+.food{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c);padding:.8rem .9rem;border-radius:4px}
+.food h3{font-size:1.1rem}
+.food small{color:var(--mute)}
+.food p{margin:.4rem 0;font-size:.92rem}
+.gi{display:flex;align-items:center;gap:.5rem;margin:.5rem 0 .2rem;font-size:.85rem;font-weight:600}
+.gibar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.gibar b{display:block;height:100%;background:var(--c)}
+.mac{display:flex;gap:.8rem;font-size:.82rem;color:var(--mute)}
+.mac b{color:var(--ink)}
+.add{margin-top:.5rem;font:600 .85rem var(--bd);padding:.35rem .7rem;border:1px solid var(--ink);background:none;color:var(--ink);border-radius:5px;cursor:pointer}
+.note{background:var(--surface);border:1px dashed var(--line);padding:.8rem 1rem;border-radius:6px;margin:1.2rem 0;font-size:.92rem}
+.steps{display:grid;gap:1rem;margin:1.2rem 0}
+.step{display:grid;grid-template-columns:9rem 1fr;gap:1rem;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:.9rem}
+.step svg{width:100%;height:auto;background:var(--bg);border-radius:4px}
+.step h3{font-size:1.15rem;margin-bottom:.2rem}
+.tag{display:inline-block;font:600 .8rem var(--bd);background:var(--bar);color:var(--bar-ink);padding:.1rem .6rem;border-radius:99px;margin-right:.3rem}
+.step ul{margin:.4rem 0 0;padding-left:1.1rem;font-size:.93rem}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:.8rem}
+.cols>div{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:.8rem 1rem}
+.cols h3{font-size:1.05rem;margin-bottom:.3rem}
+.cols p,.cols ul{font-size:.92rem;margin:.2rem 0}
+.cols ul{padding-left:1.1rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line)}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.6rem;margin:1rem 0}
+.sum div{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:.6rem .8rem}
+.sum strong{display:block;font:800 1.6rem var(--hd)}
+.sum span{font-size:.82rem;color:var(--mute)}
+.rm{border:none;background:none;color:var(--high);cursor:pointer;font:600 .85rem var(--bd)}
+.wide{overflow-x:auto}
+.hand{width:100%;max-width:11rem;height:auto;background:var(--bg);border-radius:4px}
+.hero{border-radius:14px;overflow:hidden;background:linear-gradient(#3A3470 0%,#B35C7E 45%,#F6A56E 78%,#FFD38A 100%);margin-bottom:1.4rem}
+.hero .txt{padding:1.6rem 1.4rem .6rem;max-width:40rem;color:#FFF6E3}
+.hero h2{font-size:clamp(2rem,6.5vw,3.5rem);letter-spacing:-.02em;margin:0 0 .6rem}
+.hero p{margin:0 0 1rem;color:#FFE9CC;font-size:1.05rem}
+.hero .btns{display:flex;gap:.5rem;flex-wrap:wrap}
+.hero button{font:600 .95rem var(--bd);padding:.6rem 1.1rem;border-radius:8px;cursor:pointer;border:2px solid #FFF6E3;background:transparent;color:#FFF6E3}
+.hero button.main{background:#F2B705;border-color:#F2B705;color:#1B2A35}
+.hero svg{display:block;width:100%;height:auto}
+.day{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:.8rem}
+.day>div{padding:1rem;border-radius:10px;color:#1B2A35}
+.day h3{font-size:1.1rem;margin-bottom:.3rem}
+.day p{margin:0;font-size:.93rem}
+.t1{background:#BFE9E6}.t2{background:#FFD9A8}.t3{background:#C9E4B8}.t4{background:#F6C9C0}
+.mot{max-width:44rem}
+.cols h3 .tag{margin:0 0 0 .4rem;font-size:.72rem}
+@media (max-width:34rem){.step{grid-template-columns:1fr}.step svg{max-width:10rem}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="logo">Barre<i></i>Assiette</div>
+<p>Mange mieux, monte plus haut : les aliments qui comptent, la progression pas à pas vers le muscle-up et un journal du jour.</p>
+<nav role="tablist">
+<button role="tab" data-t="pourquoi">Accueil</button>
+<button role="tab" data-t="aliments">Aliments</button>
+<button role="tab" data-t="muscle-up">Muscle-up</button>
+<button role="tab" data-t="recuperation">Récupération</button>
+<button role="tab" data-t="journal">Mon journal</button>
+</nav></div></header>
+
+<main><div class="wrap">
+
+<section id="pourquoi" hidden>
+<div class="hero">
+<div class="txt"><h2>Ici, la salle de sport, c’est l’île.</h2>
+<p>Calisthénie, assiette et récupération pensées pour La Réunion : une barre, un lever de soleil, et tu progresses.</p>
+<div class="btns"><button class="main" data-go="muscle-up">Attaquer le muscle-up</button><button data-go="aliments">Voir les aliments</button></div></div>
+<svg viewBox="0 0 800 300" role="img" aria-label="Paysage de La Réunion au lever du soleil, avec une barre de traction sur la plage">
+<defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17A2B0"/><stop offset="1" stop-color="#0B6674"/></linearGradient>
+<radialGradient id="sun"><stop offset="0" stop-color="#FFF3C4"/><stop offset="1" stop-color="#FFD38A" stop-opacity="0"/></radialGradient>
+<g id="fg" fill="none" stroke-linecap="round"><path d="M50 20L60 34L47 42L52 68L58 84L50 98M47 42L52 68"/></g></defs>
+<circle cx="400" cy="205" r="95" fill="url(#sun)"/><circle cx="400" cy="205" r="30" fill="#FFF0B8"/>
+<path d="M0 232L90 150L150 110L190 100L240 140L330 232Z" fill="#4A3F6B"/>
+<path d="M210 232L300 175L380 215L430 232Z" fill="#5C4A78"/>
+<path d="M470 232L600 162L640 150L682 150L722 166L800 215V232Z" fill="#33283F"/>
+<ellipse cx="661" cy="150" rx="22" ry="4" fill="#E8552D"/><path d="M655 153L648 178M667 153L674 174" stroke="#E8552D" stroke-width="2.5" stroke-linecap="round"/>
+<rect y="232" width="800" height="68" fill="url(#sea)"/>
+<path d="M368 244h64M380 255h40M389 266h22" stroke="#FFF0B8" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+<path d="M0 272Q200 252 420 266T800 262V300H0Z" fill="#F1D9A0"/>
+<path d="M70 290Q86 242 62 200" stroke="#4B3621" stroke-width="7" fill="none" stroke-linecap="round"/>
+<g stroke="#1F6B3A" stroke-width="6" fill="none" stroke-linecap="round"><path d="M62 200Q35 180 10 196"/><path d="M62 200Q50 170 30 160"/><path d="M62 200Q80 172 104 168"/><path d="M62 200Q92 188 116 204"/><path d="M62 200Q62 175 60 156"/></g>
+<g stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"><path d="M300 70q7-7 14 0q7-7 14 0"/><path d="M345 96q5-5 10 0q5-5 10 0"/></g>
+<g stroke="#F2B705" stroke-width="4" stroke-linecap="round"><path d="M590 190V288M685 190V288"/></g>
+<g transform="translate(585 168) scale(1.1)"><use href="#fg" stroke="#FFF6E3" stroke-width="8.5"/><use href="#fg" stroke="#1B2A35" stroke-width="4.2"/>
+<circle cx="42" cy="33" r="6.5" fill="#1B2A35" stroke="#FFF6E3" stroke-width="1.8"/></g>
+<path d="M590 189H685" stroke="#F2B705" stroke-width="5" stroke-linecap="round"/>
+</svg></div>
+
+<h2>Une journée type sur l’île</h2>
+<div class="day">
+<div class="t1"><h3>Au lever du soleil</h3><p>Il fait encore frais et la lumière est belle : le meilleur moment pour la barre et la mobilité. Bois un verre d’eau avant de commencer.</p></div>
+<div class="t2"><h3>Dans la chaleur du jour</h3><p>Chaleur et humidité fatiguent vite. Hydrate-toi, mange léger et évite les séances dures en plein soleil.</p></div>
+<div class="t3"><h3>En fin d’après-midi</h3><p>Deuxième créneau pour t’entraîner ou marcher d’un bon pas, quand la température redescend.</p></div>
+<div class="t4"><h3>Le week-end, dehors</h3><p>Une rando vers les cirques, le Piton des Neiges ou le volcan : l’île est un immense terrain de cardio.</p></div>
+</div>
+
+<h2 style="margin-top:1.8rem">Pourquoi bouger</h2>
+<p class="lead mot">Bouger régulièrement protège le cœur, stabilise la glycémie, garde muscles et os solides, aide à mieux dormir et à mieux gérer le stress. L’OMS conseille aux adultes 150 à 300 minutes d’activité modérée par semaine, avec du renforcement musculaire au moins 2 jours. Mais le vrai secret, c’est de trouver une activité qui te donne envie de revenir.</p>
+
+<h2 style="margin-top:1.4rem">Trouve ton truc</h2>
+<div class="day">
+<div class="t1"><h3>Calisthénie</h3><p>Une barre, ton poids de corps, des progrès qu’on voit. C’est le cœur de ce site.</p></div>
+<div class="t3"><h3>Rando et trail</h3><p>L’île est connue pour son trail, avec la Diagonale des Fous. Mais une simple balade suffit pour commencer.</p></div>
+<div class="t2"><h3>L’eau</h3><p>Nage et sports de plage, en baignant uniquement dans les zones autorisées et en respectant les consignes locales.</p></div>
+<div class="t4"><h3>La danse</h3><p>Séga, maloya ou autre : bouger en musique, sans avoir l’impression de faire du sport.</p></div>
+</div>
+<div class="note">Au soleil, pense à l’eau, à la crème solaire et à l’ombre. Si tu reprends après une longue pause, si tu as une maladie ou une douleur, demande d’abord l’avis d’un médecin et monte en charge progressivement.</div>
+</section>
+
+<section id="aliments">
+<h2>Les aliments qui servent vraiment</h2>
+<p class="lead">Valeurs pour 100 g. L’indice glycémique (IG) indique la vitesse à laquelle un aliment fait monter le sucre dans le sang : bas jusqu’à 55, moyen de 56 à 69, haut à partir de 70.</p>
+<div class="tools">
+<input id="q" type="search" placeholder="Rechercher un aliment" aria-label="Rechercher un aliment">
+<select id="sort" aria-label="Trier"><option value="n">Trier par nom</option><option value="ig">IG croissant</option><option value="p">Plus de protéines</option><option value="k">Moins de calories</option></select>
+</div>
+<div class="tools" id="cats"></div>
+<div class="grid" id="foods"></div>
+<div class="note"><strong>IG ou charge glycémique ?</strong> L’IG est mesuré sur une dose fixe de glucides. La pastèque a un IG haut, mais elle contient très peu de glucides : l’effet réel sur la glycémie reste faible. Ce qui compte au final, c’est l’IG <em>et</em> la quantité mangée, idéalement avec des fibres, des protéines ou des bonnes graisses. Les valeurs sont des moyennes indicatives qui varient selon la cuisson et la maturité.</div>
+</section>
+
+<section id="muscle-up" hidden>
+<h2>Muscle-up : la progression pas à pas</h2>
+<p class="lead">Le muscle-up enchaîne une traction explosive, une transition au-dessus de la barre et une poussée. Il demande de la force de tirage ET de poussée : ne saute pas d’étape.</p>
+<div class="cols">
+<div><h3>Prérequis</h3><ul><li>10 tractions strictes</li><li>15 dips aux barres parallèles</li><li>Suspension passive 45 s</li><li>Épaules et poignets échauffés</li></ul></div>
+<div><h3>Rythme conseillé</h3><p>3 séances par semaine, 48 h entre deux séances de tirage. Fais l’étape en cours en premier, quand tu es frais.</p></div>
+</div>
+<h2 style="margin-top:1.4rem">La prise de barre</h2>
+<p class="lead">La façon d’attraper la barre change tout pour la transition. Voici les trois prises à connaître.</p>
+<div class="cols">
+<div><h3>Prise normale (pronation)</h3>
+<svg class="hand" viewBox="0 0 120 60" role="img" aria-label="Prise normale : la barre est dans les doigts"><rect x="4" y="26" width="46" height="12" rx="6" fill="var(--mute)"/><rect x="46" y="22" width="44" height="20" rx="8" fill="var(--line)"/><circle cx="82" cy="32" r="7" fill="#F2B705"/></svg>
+<p>Paumes vers l’avant, mains à largeur d’épaules, pouces enroulés autour de la barre. La barre repose dans les doigts. C’est la base des tractions.</p></div>
+<div><h3>False grip <span class="tag">clé du muscle-up</span></h3>
+<svg class="hand" viewBox="0 0 120 60" role="img" aria-label="False grip : la barre est à la base de la paume"><rect x="4" y="34" width="40" height="12" rx="6" fill="var(--mute)"/><rect x="40" y="20" width="46" height="20" rx="8" fill="var(--line)" transform="rotate(-20 44 32)"/><circle cx="50" cy="29" r="7" fill="#F2B705"/></svg>
+<p>La barre est posée en diagonale à la base de la paume, près du poignet, et le poignet est replié par-dessus. Résultat : à la transition, ton poignet est déjà au-dessus de la barre, donc tu n’as plus à le retourner en plein effort. Schéma simplifié.</p>
+<ul><li>Entraîne-la : suspensions de 3 × 10 à 20 s, puis tractions en false grip</li><li>Elle fatigue les avant-bras et chauffe la paume : un peu de magnésie aide</li></ul></div>
+<div><h3>Supination (chin-up)</h3><p>Paumes tournées vers toi. Les biceps aident davantage : pratique pour gagner de la force de tirage au début. Mais le muscle-up classique se fait en pronation ou en false grip.</p><p>Barre de 28 à 32 mm, assez haute pour que les pieds ne touchent pas le sol.</p></div>
+</div>
+<h2 style="margin-top:1.4rem">Les étapes</h2>
+<div class="steps" id="steps"></div>
+
+<h2 style="margin-top:1.6rem">Les variantes</h2>
+<div class="cols">
+<div><h3>Strict</h3><p>Sans élan ni jambes. Le plus propre et le plus dur : l’objectif long terme.</p></div>
+<div><h3>Kipping</h3><p>Avec un balancier du corps pour créer de l’élan. Plus accessible, mais exige un bon timing.</p></div>
+<div><h3>Barre basse ou élastique</h3><p>Pieds au sol ou élastique sous les pieds pour s’entraîner à la transition avec moins de charge.</p></div>
+<div><h3>Anneaux</h3><p>Instables et exigeants pour les épaules : à tenter après la barre fixe.</p></div>
+</div>
+
+<h2 style="margin-top:1.6rem">Erreurs fréquentes</h2>
+<div class="wide"><table>
+<tr><th>Erreur</th><th>Correction</th></tr>
+<tr><td>Bras tendus pendant la transition (le « poulet »)</td><td>Tire vers les hanches, pas vers le menton, et emmène les coudes derrière la barre.</td></tr>
+<tr><td>Prise trop large</td><td>Prends la barre à largeur d’épaules, poignets au-dessus.</td></tr>
+<tr><td>Pas assez haut sur la traction</td><td>Vise la barre au niveau du nombril ou du bas des pectoraux avant de basculer.</td></tr>
+<tr><td>Brûler les étapes</td><td>Valide chaque étape sur 3 séries propres avant de passer à la suivante.</td></tr>
+</table></div>
+
+<h2 style="margin-top:1.6rem">Autres mouvements freestyle</h2>
+<div class="cols">
+<div><h3>Front lever</h3><p>Corps horizontal sous la barre. Progresse : tuck, advanced tuck, one leg, straddle, full.</p></div>
+<div><h3>Planche</h3><p>Corps horizontal en appui sur les mains. Commence par la planche penchée et la pseudo planche push-up.</p></div>
+<div><h3>Équilibre sur les mains</h3><p>Travaille d’abord le mur, puis l’équilibre libre, quelques minutes chaque jour.</p></div>
+</div>
+<div class="note">Pour voir ces mouvements en vidéo, cherche « muscle-up progression » chez des coachs reconnus en calisthénie. En cas de douleur à l’épaule ou au coude, arrête et consulte un professionnel de santé.</div>
+</section>
+
+<section id="recuperation" hidden>
+<h2>Récupération et compléments utiles</h2>
+<p class="lead">On progresse pendant le repos, pas pendant la séance. Les compléments ne remplacent jamais les bases, et la plupart de ceux qu’on vend ne servent à rien.</p>
+<div class="cols">
+<div><h3>Les bases d’abord</h3><ul><li>Sommeil : 7 à 9 h par nuit</li><li>Protéines : environ 1,6 à 2 g par kg et par jour</li><li>Hydratation et repas complets autour de la séance</li><li>1 à 2 jours de repos par semaine, échauffement avant</li></ul></div>
+</div>
+<h2 style="margin-top:1.4rem">Les compléments qui ont une vraie utilité</h2>
+<div class="cols">
+<div><h3>Magnésium <span class="tag">souvent utile</span></h3><p>Intervient dans les muscles et le sommeil. Utile si ton alimentation en apporte peu ou si tu as crampes et fatigue. En complément, vise environ 200 à 300 mg par jour ; au-delà, troubles digestifs fréquents. Le bisglycinate est mieux toléré que l’oxyde.</p><p>D’abord par l’assiette : amandes, épinards, légumineuses, flocons d’avoine.</p></div>
+<div><h3>Whey <span class="tag">de temps en temps</span></h3><p>Ce n’est qu’un aliment : des protéines de lait pratiques. Utile pour atteindre ton quota (20 à 30 g après la séance ou en collation) quand tu manques de temps. Pas indispensable si tu manges assez d’œufs, de laitages ou de viande.</p></div>
+<div><h3>Créatine <span class="tag">bien étudiée</span></h3><p>La mieux prouvée pour la force. Monohydrate, 3 à 5 g par jour, tous les jours, sans phase de charge. Garde de l’eau dans les muscles. Avis médical en cas de problème rénal.</p></div>
+<div><h3>Vitamine D <span class="tag">selon la saison</span></h3><p>Le soleil est faible de l’automne au printemps en France. Un dosage sanguin et l’avis du médecin disent si tu en as besoin.</p></div>
+<div><h3>Oméga-3 <span class="tag">si peu de poisson</span></h3><p>Deux poissons par semaine dont un gras (saumon, sardine) couvrent le besoin. Sinon, un complément peut aider.</p></div>
+<div><h3>À éviter</h3><p>Brûleurs de graisse, boosters, « stimulants » à haute dose. Les BCAA sont inutiles quand les protéines du jour sont suffisantes.</p></div>
+</div>
+<div class="note">Ces repères sont généraux. Demande conseil à un médecin ou un pharmacien si tu prends un traitement, si tu es enceinte, mineur ou si tu as une maladie.</div>
+</section>
+
+<section id="journal" hidden>
+<h2>Mon journal du jour</h2>
+<p class="lead">Écris ce que tu as mangé, comme tu le dirais : « 3 œufs, 200 g de riz, 1 banane, 1 yaourt ». Le calcul est une estimation. Les données restent dans ton navigateur.</p>
+<div class="tools"><input id="free" type="text" placeholder="3 œufs, 200 g de riz, 1 banane" aria-label="Ce que j’ai mangé" style="flex:1;min-width:14rem"><button class="add" id="go" style="margin:0">Calculer</button></div>
+<p id="msg" class="lead" aria-live="polite"></p>
+<div class="tools">
+<label>Poids (kg) <input id="pw" type="number" style="width:5rem"></label>
+<label>Taille (cm) <input id="ph" type="number" style="width:5rem"></label>
+<label>Âge <input id="pa" type="number" style="width:4.5rem"></label>
+<select id="ps" aria-label="Sexe"><option value="h">Homme</option><option value="f">Femme</option></select>
+<select id="px" aria-label="Activité"><option value="1.2">Sédentaire</option><option value="1.375">Peu actif (1-2 séances)</option><option value="1.55">Actif (3-4 séances)</option><option value="1.725">Très actif (5+ séances)</option></select>
+</div>
+<div class="sum">
+<div><strong id="tk">0</strong><span>kcal</span></div>
+<div><strong id="tp">0</strong><span>g de protéines</span></div>
+<div><strong id="tg">0</strong><span>g de glucides</span></div>
+<div><strong id="tl">0</strong><span>g de lipides</span></div>
+</div>
+<div id="goal"></div>
+<p class="lead" style="font-size:.85rem;margin-top:.5rem">Objectif estimé pour garder ton poids (formule Mifflin-St Jeor) et protéines à 1,8 g par kg. Pour perdre du gras, retire environ 10 à 15 % de calories ; pour prendre du muscle, ajoute 5 à 10 %.</p>
+<div class="wide"><table id="jt"></table></div>
+</section>
+
+</div></main>
+
+<script>
+const F=[
+["Flocons d’avoine","Féculents",55,370,13,60,7,"Riches en bêta-glucanes : énergie durable et satiété."],
+["Quinoa cuit","Féculents",53,120,4.4,21,1.9,"Protéines complètes et fibres, sans gluten."],
+["Riz basmati cuit","Féculents",55,130,2.7,28,.3,"Énergie facile à digérer autour de l’entraînement."],
+["Pâtes complètes cuites","Féculents",48,124,5,25,1,"Plus de fibres que les pâtes blanches."],
+["Patate douce cuite","Féculents",63,90,2,21,.1,"Bêta-carotène, potassium et glucides de qualité."],
+["Pain blanc","Féculents",75,265,9,49,3.2,"IG haut : à garder pour après l’effort, en petite quantité."],
+["Lentilles cuites","Légumineuses",30,116,9,20,.4,"Protéines végétales, fer et fibres."],
+["Pois chiches cuits","Légumineuses",28,164,8.9,27,2.6,"Protéines, fibres et magnésium."],
+["Brocoli","Légumes",15,34,2.8,7,.4,"Vitamine C, vitamine K et fibres pour très peu de calories."],
+["Épinards","Légumes",15,23,2.9,3.6,.4,"Fer, magnésium et folates."],
+["Carotte crue","Légumes",35,41,.9,10,.2,"Bêta-carotène bon pour la vue et la peau."],
+["Pomme","Fruits",38,52,.3,14,.2,"Fibres (pectine) et bonne satiété."],
+["Orange","Fruits",43,47,.9,12,.1,"Vitamine C, aide à la récupération."],
+["Myrtilles","Fruits",40,57,.7,14,.3,"Antioxydants, intéressantes après l’effort."],
+["Banane","Fruits",51,89,1.1,23,.3,"Potassium et glucides rapides avant l’entraînement."],
+["Pastèque","Fruits",72,30,.6,8,.2,"IG haut mais peu de glucides au total : hydratante."],
+["Œufs","Protéines",null,143,12.6,.7,9.5,"Protéines complètes, choline et vitamine D."],
+["Poulet cuit (blanc)","Protéines",null,165,31,0,3.6,"Très riche en protéines, peu gras."],
+["Saumon cuit","Protéines",null,208,20,0,13,"Oméga-3 pour le cœur et les articulations."],
+["Yaourt grec nature","Protéines",11,59,10,3.6,.4,"Protéines et calcium, pratique au petit-déjeuner."],
+["Amandes","Bons gras",15,579,21,22,50,"Vitamine E, magnésium et bonnes graisses (à doser)."],
+["Avocat","Bons gras",15,160,2,9,15,"Graisses mono-insaturées et potassium."],
+["Whey (poudre)","Protéines",null,400,80,8,6,"Protéines pratiques, de temps en temps."],
+["Thon au naturel","Protéines",null,116,26,0,1,"Très riche en protéines, peu gras."],
+["Fromage blanc 0 %","Protéines",30,45,8,4,.2,"Protéines et calcium pour peu de calories."],
+["Lait demi-écrémé","Protéines",30,46,3.4,4.8,1.6,"Calcium et protéines."],
+["Beurre de cacahuète","Bons gras",14,588,25,20,50,"Énergie dense et protéines (à doser)."]
+];
+const $=s=>document.querySelector(s);
+const col=ig=>ig===null?"var(--mute)":ig<=55?"var(--low)":ig<70?"var(--mid)":"var(--high)";
+let cat="Tous",J=[];
+try{J=JSON.parse(localStorage.getItem("ba-journal")||"[]")}catch(e){J=[]}
+function save(){try{localStorage.setItem("ba-journal",JSON.stringify(J))}catch(e){}}
+function cats(){const c=["Tous",...new Set(F.map(f=>f[1]))];$("#cats").innerHTML=c.map(x=>`<button class="chip" aria-pressed="${x===cat}" data-c="${x}">${x}</button>`).join("")}
+function foods(){
+ const q=$("#q").value.toLowerCase().trim(),s=$("#sort").value;
+ let l=F.map((f,i)=>({f,i})).filter(o=>(cat==="Tous"||o.f[1]===cat)&&o.f[0].toLowerCase().includes(q));
+ const key={n:o=>o.f[0],ig:o=>o.f[2]===null?-1:o.f[2],p:o=>-o.f[4],k:o=>o.f[3]}[s];
+ l.sort((a,b)=>key(a)>key(b)?1:key(a)<key(b)?-1:0);
+ $("#foods").innerHTML=l.length?l.map(({f,i})=>{const c=col(f[2]);
+ return `<article class="food" style="--c:${c}"><h3>${f[0]}</h3><small>${f[1]}</small><p>${f[7]}</p>
+ <div class="gi"><span>IG ${f[2]===null?"–":f[2]}</span><div class="gibar"><b style="width:${f[2]===null?0:Math.min(f[2],100)}%"></b></div></div>
+ <div class="mac"><span><b>${f[3]}</b> kcal</span><span><b>${f[4]}</b> P</span><span><b>${f[5]}</b> G</span><span><b>${f[6]}</b> L</span></div>
+ <button class="add" data-i="${i}">Ajouter au journal</button></article>`}).join(""):"<p>Aucun aliment ne correspond. Essaie un autre mot ou la catégorie Tous.</p>";
+}
+function journal(){
+ let k=0,p=0,g=0,l=0;
+ const rows=J.map((e,n)=>{const f=F[e.i],r=e.g/100;k+=f[3]*r;p+=f[4]*r;g+=f[5]*r;l+=f[6]*r;
+ return `<tr><td>${f[0]}</td><td><input type="number" min="10" step="10" value="${e.g}" data-n="${n}" style="width:5rem;font:inherit"> g</td><td>${Math.round(f[3]*r)} kcal</td><td><button class="rm" data-r="${n}">Retirer</button></td></tr>`}).join("");
+ $("#jt").innerHTML=J.length?`<tr><th>Aliment</th><th>Quantité</th><th>Énergie</th><th></th></tr>${rows}`:"<tr><td>Ton journal est vide. Ajoute un aliment depuis l’onglet Aliments.</td></tr>";
+ $("#tk").textContent=Math.round(k);$("#tp").textContent=Math.round(p);$("#tg").textContent=Math.round(g);$("#tl").textContent=Math.round(l);goal(k,p);
+}
+/* Schémas du muscle-up : vue de profil, chaque pose = barre, poignet, coude, épaule, tête, hanche, genou, pied */
+const P=[
+ {b:[50,20],e:[50,38],s:[50,52],h:[52,43],p:[52,82],k:[52,98],f:[48,114],n:"Suspension"},
+ {b:[50,20],e:[60,34],s:[47,42],h:[42,33],p:[52,68],k:[58,84],f:[50,98],n:"Traction haute"},
+ {b:[50,20],e:[60,28],s:[44,18],h:[36,10],p:[50,46],k:[58,60],f:[52,74],n:"Transition"},
+ {b:[50,50],e:[58,40],s:[46,32],h:[42,22],p:[50,64],k:[52,82],f:[50,98],n:"Appui bas"},
+ {b:[50,50],e:[49,40],s:[48,28],h:[47,18],p:[50,60],k:[52,78],f:[50,96],n:"Verrouillage"}];
+function fig(p,k){const L=(a,b)=>`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}"/>`;
+ return `<svg viewBox="0 0 100 120" role="img" aria-label="Schéma : ${p.n}"><g stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none" style="color:var(--ink)">${L(p.b,p.e)}${L(p.e,p.s)}${L(p.s,p.p)}${L(p.p,p.k)}${L(p.k,p.f)}</g>
+ <circle cx="${p.h[0]}" cy="${p.h[1]}" r="6" fill="var(--ink)"/><line x1="26" y1="${p.b[1]}" x2="74" y2="${p.b[1]}" stroke="#F2B705" stroke-width="3" stroke-linecap="round"/><circle cx="${p.b[0]}" cy="${p.b[1]}" r="3" fill="#F2B705"/><text x="4" y="115" font-size="8" fill="var(--mute)" font-family="sans-serif">${p.n}</text></svg>`}
+const S=[
+ [0,"Tractions strictes","3 × 8 à 10 · repos 2 min","Poitrine vers la barre, descente contrôlée. Passe à 3 × 12 avant l’étape suivante."],
+ [1,"Tractions poitrine à la barre","4 × 5 · repos 2 min","Tire explosif, barre vers le bas des pectoraux, coudes vers l’arrière. Dès que tu peux, pense « tirer vers les hanches »."],
+ [2,"Transition avec élastique","4 × 4 · repos 2 min","Élastique sous un pied ou les deux. Apprends à passer les coudes au-dessus de la barre sans tout casser."],
+ [3,"Dips et négatifs","3 × 12 dips + 3 × 3 descentes lentes","Dips aux barres parallèles. Pour la descente : depuis la position haute, descends en 4 à 5 s en inversant la transition."],
+ [4,"Muscle-up assisté","5 × 2 à 3 · repos 2 à 3 min","Élastique ou barre basse. Réduis peu à peu l’assistance. Garde chaque répétition propre."],
+ [4,"Muscle-up strict ou kipping","5 × 1 à 3 · repos 3 min","Essaie le muscle-up complet. Arrête la série dès que la technique se dégrade."]];
+function steps(){$("#steps").innerHTML=S.map((s,i)=>`<div class="step">${fig(P[s[0]])}<div><h3><span class="tag">Étape ${i+1}</span>${s[1]}</h3><p style="margin:.3rem 0"><strong>${s[2]}</strong></p><p style="margin:0;font-size:.93rem">${s[3]}</p></div></div>`).join("")}
+function tab(t){document.querySelectorAll("section").forEach(s=>s.hidden=s.id!==t);document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t))}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{tab(b.dataset.t);try{history.replaceState(null,"","#"+b.dataset.t)}catch(e){}});
+$("#q").oninput=foods;$("#sort").onchange=foods;
+$("#cats").onclick=e=>{const c=e.target.dataset.c;if(c){cat=c;cats();foods()}};
+$("#foods").onclick=e=>{const i=e.target.dataset.i;if(i!==undefined){J.push({i:+i,g:100});save();journal();e.target.textContent="Ajouté";setTimeout(()=>e.target.textContent="Ajouter au journal",1200)}};
+$("#jt").onclick=e=>{const r=e.target.dataset.r;if(r!==undefined){J.splice(+r,1);save();journal()}};
+$("#jt").onchange=e=>{const n=e.target.dataset.n;if(n!==undefined){J[+n].g=Math.max(10,+e.target.value||100);save();journal()}};
+const AL=[["avoine|flocon",40],["quinoa",150],["riz",150],["pate",150],["patate",150],["pain|baguette",30],["lentille",150],["pois chiche",150],["brocoli",100],["epinard",100],["carotte",80],["pomme",180],["orange",150],["myrtille",100],["banane",120],["pasteque",300],["oeuf",55],["poulet",120],["saumon",120],["yaourt",125],["amande",1.2],["avocat",150],["whey",30],["thon",120],["fromage blanc",100],["lait",250],["cacahuete",15]];
+const NW={un:1,une:1,deux:2,trois:3,quatre:4,cinq:5,six:6};
+const norm=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/œ/g,"oe").toLowerCase();
+function parse(t){const ok=[],bad=[];
+ norm(t).split(/[,;\n+]|\bet\b/).map(x=>x.trim()).filter(Boolean).forEach(seg=>{
+  seg=seg.replace(/^(un|une|deux|trois|quatre|cinq|six)\b/,w=>NW[w]);
+  const m=seg.match(/^(?:(\d+(?:[.,]\d+)?)\s*(grammes?|gr|kg|g|ml|cl)?\b\s*)?(?:(?:verres?|bols?|portions?|tranches?|doses?|mesures?|cuilleres?(?: a soupe| a cafe)?|boites?|poignees?)\s+)?(?:de\s+|d['’])?(.+)$/);
+  const n=m&&m[1]?parseFloat(m[1].replace(",",".")):1,u=m&&m[2],name=m?m[3]:seg;
+  const i=AL.findIndex(a=>a[0].split("|").some(k=>name.includes(k)));
+  if(i<0){bad.push(seg);return}
+  const g=u?(u==="kg"?n*1000:u==="cl"?n*10:n):n*AL[i][1];
+  ok.push({i,g:Math.round(g)});});
+ return{ok,bad}}
+let PR={w:75,h:178,a:25,s:"h",x:1.55};
+try{PR={...PR,...JSON.parse(localStorage.getItem("ba-profil")||"{}")}}catch(e){}
+function bar(n,v,t,u){const r=v/t,c=r>1.1?"var(--high)":r>=.9?"var(--low)":"var(--mid)";return `<p style="margin:.6rem 0 .2rem"><strong>${n}</strong> : ${Math.round(v)} / ${t} ${u} (${Math.round(r*100)} %)</p><div class="gibar" style="--c:${c}"><b style="width:${Math.min(r*100,100)}%"></b></div>`}
+function goal(k,p){const bmr=10*PR.w+6.25*PR.h-5*PR.a+(PR.s==="h"?5:-161);
+ $("#goal").innerHTML=bar("Énergie",k,Math.round(bmr*PR.x),"kcal")+bar("Protéines",p,Math.round(PR.w*1.8),"g")}
+$("#go").onclick=()=>{const r=parse($("#free").value);
+ r.ok.forEach(e=>J.push(e));save();journal();
+ $("#msg").textContent=(r.ok.length?"Ajouté : "+r.ok.map(e=>F[e.i][0]+" ("+e.g+" g)").join(", ")+". ":"")+(r.bad.length?"Non reconnu : "+r.bad.join(", ")+". Choisis un aliment proche dans l’onglet Aliments.":"");
+ if(!r.bad.length)$("#free").value=""};
+$("#free").onkeydown=e=>{if(e.key==="Enter")$("#go").click()};
+[["pw","w"],["ph","h"],["pa","a"],["ps","s"],["px","x"]].forEach(([id,k])=>{const el=$("#"+id);el.value=PR[k];el.onchange=()=>{PR[k]=k==="s"?el.value:parseFloat(el.value)||PR[k];try{localStorage.setItem("ba-profil",JSON.stringify(PR))}catch(e){}journal()}});
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>document.querySelector('nav button[data-t="'+b.dataset.go+'"]').click());
+cats();foods();steps();journal();
+const h=location.hash.slice(1);tab(["pourquoi","aliments","muscle-up","recuperation","journal"].includes(h)?h:"pourquoi");
+</script>
+</body>
+</html>
